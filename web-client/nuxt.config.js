@@ -25,9 +25,12 @@ module.exports = {
       { src: '/fb-sdk.js' },
       { src: 'https://kit.fontawesome.com/3b64c4f053.js' }
     ],
-    plugins: [
-      '~/plugins/firebase.js'
-    ],
+
+    plugins: ['~/plugins/firebase.js'],
+
+    build: {
+      transpile: [/^vue2-google-maps($|\/)/]
+    }
   },
 
   modules: ['@nuxtjs/style-resources'],
@@ -46,7 +49,12 @@ module.exports = {
   */
   loading: { color: '#fff' },
 
+  plugins: [{ src: "~/plugins/google-maps.js", ssr: false }],
+
+
   build: {
+    transpile: [/^vue2-google-maps($|\/)/],
+
     extend(config, ctx) {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'

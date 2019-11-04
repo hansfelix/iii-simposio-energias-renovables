@@ -15,7 +15,10 @@
         <p class="speaker-card__descripcion">{{ descripcion }}</p>
 
         <div class="speaker-card__actions">
-          <div class="speaker-card__button" @click="showModal = true">VER MÁS</div>
+          <div class="speaker-card__button" @click="showModal = true">
+            VER MÁS
+            <i class="fas fa-arrow-right ml-2 mr-1"></i>
+          </div>
         </div>
       </div>
     </div>
@@ -119,6 +122,7 @@ export default {
     padding: 5px 10px;
     border-radius: 4px;
     font-size: 13px;
+    color: #767676;
     cursor: pointer;
     transition: 0.2s all ease-in-out;
 

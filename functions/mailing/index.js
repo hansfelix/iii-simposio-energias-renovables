@@ -23,13 +23,18 @@ let transporter = nodemailer.createTransport({
 const mailOptions = {
     from: 'III Simposio de Energías Renovables <ser@udep.pe>',
     to: '', // Cambiar
+    bcc: 'e.m.c.onuno10@gmail.com, gian.ydrogo@ieee.org',
     subject: 'Pre-registro al III Simposio de Energías Renovables',
     html: ""
 };
 
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
 
 const sendMails = functions.firestore.document('leads/{leadId}')
-    .onCreate((change, context) => {
+    .onCreate(async (change, context) => {
         // Escribir el lead en Google Sheet
         let newLead = {
             'Tipo de participante': change.data().tipo,
@@ -38,24 +43,56 @@ const sendMails = functions.firestore.document('leads/{leadId}')
             'Celular': change.data().celular,
             'Horario de llamada': change.data().horarioLlamada,
             'Aceptó términos y condiciones': change.data().aceptaTyC ? 'Si' : 'No',
+            'Observaciones': ''
         }
-        console.log("newLead", newLead)
+        console.log("Nuevo Lead: ", newLead)
+
+
+        // Envío de correo
+        if (validateEmail(change.data().email)) {
+            mailOptions.to = change.data().email;
+            mailOptions.html = renderHTML({
+                name: change.data().nombre,
+                email: change.data().email
+            });
+
+            await transporter.sendMail(mailOptions);
+        }
+
         writeLead(newLead);
 
-        // Modificar Options
-        mailOptions.to = change.data().email;
-        mailOptions.html = renderHTML({
-            name: change.data().nombre,
-            email: change.data().email
-        });
+        // Debe retornar un Promise
+        return Promise.resolve('Exito')
+    });
 
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.log('Error', error);
-                return Promise.reject(error)
-            }
-            console.log('Sended');
-        })
+
+const sendMails = functions.firestore.document('leads/{leadId}')
+    .onCreate(async (change, context) => {
+        // Escribir el lead en Google Sheet
+        let newLead = {
+            'Tipo de participante': change.data().tipo,
+            'Nombres y apellidos': change.data().nombre,
+            'Correo electrónico': change.data().email,
+            'Celular': change.data().celular,
+            'Horario de llamada': change.data().horarioLlamada,
+            'Aceptó términos y condiciones': change.data().aceptaTyC ? 'Si' : 'No',
+            'Observaciones': ''
+        }
+        console.log("Nuevo Lead: ", newLead)
+
+
+        // Envío de correo
+        if (validateEmail(change.data().email)) {
+            mailOptions.to = change.data().email;
+            mailOptions.html = renderHTML({
+                name: change.data().nombre,
+                email: change.data().email
+            });
+
+            await transporter.sendMail(mailOptions);
+        }
+
+        writeLead(newLead);
 
         // Debe retornar un Promise
         return Promise.resolve('Exito')

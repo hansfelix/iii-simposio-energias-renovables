@@ -63,7 +63,10 @@
           />
           <label class="lead-form__label form-check-label custom-control-label" for="checkbox1">
             Acepto los
-            <a href="#">términos de uso de datos de la Universidad de Piura</a>
+            <a
+              href="#"
+              @click.stop="showModalTyC = true"
+            >términos de uso de datos de la Universidad de Piura</a>
           </label>
         </div>
         <div class="text-right">
@@ -71,16 +74,31 @@
         </div>
       </form>
     </div>
+
+    <Modal :showModal="showModalTyC" @close="showModalTyC = false">
+      <template slot="modal-header">Términos de Uso de Datos</template>
+      <template
+        slot="modal-body"
+      >Que, de conformidad con lo establecido en la Ley N° 29733 y su Reglamento, declaro haber sido informado y autorizo que los datos personales y/o sensibles consignados en el presente formulario, así como los que se obtengan en virtud de mi relación con la Universidad de Piura, (en adelante LA UNIVERSIDAD), incluida mi imagen, voz, firma, firma electrónica y/o huellas dactilares sean incorporados y almacenados en el Banco de Datos de LA UNIVERSIDAD, u otros que cumplan con las medidas de seguridad requeridas por las normativa de la materia; y sean tratados por LA UNIVERSIDAD y/o personas naturales y/o jurídicas a quienes la misma delegue o encargue. En este sentido, LA UNIVERSIDAD y/o las personas naturales y/o jurídicas a quienes la misma delegue o encargue podrán tratar dichos datos con las siguientes finalidades: (i) para la ejecución de la relación con el titular de los datos, (ii) para realizar la gestión económica, contable y de cobranza de los pagos efectuados por los participantes, (iii) para establecer y/o mantener contacto e informar y/o promocionar las actividades propias de LA UNIVERSIDAD,(iv) para fines estadísticos y/o de investigación,(v) para fines de prospección comercial, de marketing y/o envío de publicidad e información sobre productos y servicios,(vi) para ser compartidos con la comunidad UDEP-Alumni y cualquier otra unidad Académica o administrativa de LA UNIVERSIDAD. Los datos serán tratados mientras se consideren necesarios para los fines señalados.LA UNIVERSIDAD deja constancia de la posibilidad de ejercer los derechos de acceso, rectificación, cancelación y oposición, y cualesquier otros previstos, conforme a la normativa de la materia, solicitándolo por escrito en las siguientes direcciones Calle Mártir Olaya N°162, Miraflores, Lima o Av. Ramón Mugica 131, Urb. San Eduardo, Piura. En consecuencia, por la presente autorizo a LA UNIVERSIDAD a realizar las actividades antes señaladas.</template>
+
+      <template slot="modal-footer">
+        <button type="button" class="btn btn-primary" @click="showModalTyC = false">Entendido</button>
+      </template>
+    </Modal>
   </div>
 </template>
 
 <script>
 import { fireDb } from "~/plugins/firebase.js";
+import Modal from "@/components/Modal.vue";
 
 export default {
+  components: { Modal },
+
   data() {
     return {
       error: null,
+      showModalTyC: false,
       lead: {
         nombre: "",
         email: "",
@@ -91,6 +109,7 @@ export default {
       }
     };
   },
+
   methods: {
     async enviar() {
       let lead = this.lead;

@@ -1,38 +1,7 @@
 <template>
   <div class="preVenta">
     <!-- Bloque principal -->
-    <section class="bloque bloque-principal container">
-      <div class="row h-100 align-content-center" style="flex: 1">
-        <div class="col-lg-8 preVenta-columna-centrada">
-          <img class="bloque-principal__logo" src="/logos/logo-simposio.svg" width="475px" srcset />
-          <p
-            class="bloque-principal__phrase"
-          >Descrubre el camino para la transformación energética del Perú</p>
-          <div class="bloque-principal__information">
-            <div class="bloque-principal__information-item">
-              <i class="bloque-principal__information-icon fas fa-calendar-alt"></i>
-              <div>
-                <div class="bloque-principal__information-title">13 y 14</div>
-                <div class="bloque-principal__information-sub-title">de diciembre</div>
-              </div>
-            </div>
-
-            <div class="bloque-principal__information-item">
-              <i class="bloque-principal__information-icon fas fa-map-marker-alt"></i>
-              <div>
-                <div class="bloque-principal__information-title">Universidad de Piura</div>
-                <div class="bloque-principal__information-sub-title">(Sede Lima)</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4">
-          <!-- Formulario Lead -->
-          <LeadForm />
-        </div>
-      </div>
-    </section>
+    <principal />
 
     <!-- Bloque DESCRIPCIÓN -->
     <section class="bloque-descripcion" style="width:100%; background: white">
@@ -116,79 +85,15 @@
     </section>
 
     <!-- Bloque PRECIO -->
-    <section class="bloque-precio">
-      <div class="container">
-        <h2 class="text-center mb-5">
-          <span class="titulo-1">Inversión</span>
-        </h2>
-        <p class="mb-5">
-          Todas las entradas incluyen 💻
-          <strong>certificado digital</strong> y ☕
-          <strong>coffee break</strong>.
-        </p>
-        <div class="row">
-          <div class="col-6 col-sm-6 col-md-3">
-            <PriceCard title="Estudiante IEEE" price="130" />
-          </div>
-
-          <div class="col-6 col-sm-6 col-md-3">
-            <PriceCard title="Estudiante" price="180" />
-          </div>
-
-          <div class="col-6 col-sm-6 col-md-3">
-            <PriceCard title="Profesional IEEE" price="230" />
-          </div>
-
-          <div class="col-6 col-sm-6 col-md-3">
-            <PriceCard title="Profesional" price="280" />
-          </div>
-        </div>
-      </div>
-    </section>
+    <precio />
 
     <!-- Bloque PONENTES -->
-    <section class="bloque-ponentes">
-      <div class="container">
-        <h2 class="text-center mb-5">
-          <span class="titulo-1">Ponentes</span>
-        </h2>
-        <div class="row">
-          <ponente
-            v-for="ponente in listaPonentes"
-            :key="ponente.id"
-            :fullname="ponente.nombre"
-            :urlImg="ponente.urlImg"
-            :job="ponente.puesto"
-            :ponencias="ponente.ponencias"
-            :descripcion="ponente.descripcion"
-          ></ponente>
-        </div>
-      </div>
-    </section>
+    <ponentes />
 
     <!-- Bloque AUSPICIOS -->
-    <!-- <section class="bloque-auspicios">
-      <div class="container text-center">
-        <h5>AUSPICIAN</h5>
-        <div class="row">
-          <div class="col">
-            <img src="/logos/auspicios/te-logo.svg" width="150px" srcset />
-          </div>
-          <div class="col">
-            <img src="/logos/auspicios/logitech-logo.svg" width="150px" srcset />
-          </div>
-          <div class="col">
-            <img src="/logos/auspicios/bticino-logo.svg" width="150px" srcset />
-          </div>
-        </div>
-        <H5 class="mt-5">CON EL APOYO DE</H5>
-        <div class="row">
-          <div class="col">
-            <img src="/logos/auspicios/ieee-peru-logo-04.svg" width="150px" srcset />
-          </div>
-        </div>
-      </div>
-    </section> -->
+    <!-- <auspicios /> -->
+
+    <ubicacion />
   </div>
 </template>
 
@@ -198,49 +103,23 @@ import LeadForm from "~/components/LeadForm.vue";
 import Ponente from "~/components/SpeakerCard.vue";
 import PriceCard from "~/components/PriceCard.vue";
 
+import principal from "./index/principal";
+import precio from "./index/precio";
+import ponentes from "./index/ponentes";
+import auspicios from "./index/auspicios";
+import ubicacion from "./index/ubicacion";
+
 export default {
   layout: "landing",
   components: {
     LeadForm,
     Ponente,
-    PriceCard
-  },
-  data() {
-    return {
-      listaPonentes: [
-        {
-          id: 1,
-          nombre: "Pedro Gamio",
-          urlImg:
-            "https://simposio-energias-renovables.firebaseapp.com/static/ponentes/PEDROGAMIO.jpg",
-          puesto: "Ex Vice Ministro de Energía del Perú",
-          descripcion:
-            "Ingeniero Eléctrico por la Academia Estatal Politécnica de Belarús, Master of Science en Ingeniería por la Academia Estatal Politécnica de Belarús, Máster en Energías Renovables por la Universidad Europea de Madrid, también posee un doctorado en Ingeniería Eléctrica por la Universidad Carlos III de Madrid.",
-          ponencias: [
-            {
-              titulo:
-                "Rumbo al bicentenario: Cómo se hace realidad el mercado de las RER y cuál es su futuro en el Perú",
-              horario: "Viernes 14 de diciembre, 17:00 - 17:45",
-              tema: "Políticas de desarrollo eléctrico sostenible"
-            }
-          ]
-        },
-        {
-          id: 2,
-          nombre: "Alberto Rios",
-          urlImg:
-            "https://simposio-energias-renovables.firebaseapp.com/static/ponentes/ALBERTORIOS.jpg",
-          puesto: "Ex Vice Ministro de Energía del Perú"
-        },
-        {
-          id: 3,
-          nombre: "Herrera Descalzi",
-          urlImg:
-            "https://simposio-energias-renovables.firebaseapp.com/static/ponentes/HERRERADESCALZI.jpg",
-          puesto: "Ex-ministro de Energía del Perú"
-        }
-      ]
-    };
+    PriceCard,
+    principal,
+    precio,
+    ponentes,
+    auspicios,
+    ubicacion
   }
 };
 </script>
