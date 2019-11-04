@@ -9,9 +9,9 @@
           </div>
         </div>
         <div class="card-body text-center">
-          <h5 class="card-title title-thanks">Muchas Gracias</h5>
-          <p class="card-text mb-1">Hemos recibido tu interés en el <span class="text-simposio">Simposio de Energías Renovables</span>.</p>
-          <p class="card-text">Nos pondremos en contacto con usted.</p>
+          <h5 class="card-title title-thanks">¡Muchas gracias por registrarte!</h5>
+          <p class="card-text mb-1">Hemos recibido tu interés de participar en el <span class="text-simposio">Simposio de Energías Renovables</span>.</p>
+          <p class="card-text">Te hemos enviado un mail al correo indicado, además nos pondremos en contacto con usted.</p>
         </div>
       </div>
 
@@ -50,8 +50,9 @@ export default {
     }
 
     .card-thanks {
-      width: 80%;
+      // width: 80%;
       margin: 0 auto;
+      margin-bottom: 20px;
       border-width: 0px;
       -webkit-box-shadow: 0px 0px 8px 3px rgba(206,206,206,0.75);
       -moz-box-shadow: 0px 0px 8px 3px rgba(206,206,206,0.75);
@@ -60,7 +61,7 @@ export default {
     .title-thanks {
       font-size: 2rem;
       line-height: 1.2;
-      font-weight: 200;
+      font-weight: bold;
     }
     .text-simposio {
       color: var(--main-color-2);

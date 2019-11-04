@@ -39,6 +39,7 @@ export default {
   min-height: 100vh;
   display: grid;
   grid-template-rows: 1fr auto;
+  grid-template-columns: minmax(0, 1fr);
 
   &__content {
     padding-top: 76px;
