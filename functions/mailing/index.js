@@ -4,7 +4,7 @@ const functions = require('firebase-functions');
 const nodemailer = require('nodemailer');
 const hbs = require("handlebars");
 
-const writeLead = require('../google_spreadsheet')
+const {writeLead, writeRegistered} = require('../google_spreadsheet')
 
 // Configuración del handlebar
 const renderHTML = function (data) {
@@ -66,36 +66,40 @@ const sendMails = functions.firestore.document('leads/{leadId}')
     });
 
 
-const sendMails = functions.firestore.document('leads/{leadId}')
-    .onCreate(async (change, context) => {
+const newRegistered = functions.firestore.document('inscripciones/{leadId}')
+    .onCreate(async (snap, context) => {
         // Escribir el lead en Google Sheet
-        let newLead = {
-            'Tipo de participante': change.data().tipo,
-            'Nombres y apellidos': change.data().nombre,
-            'Correo electrónico': change.data().email,
-            'Celular': change.data().celular,
-            'Horario de llamada': change.data().horarioLlamada,
-            'Aceptó términos y condiciones': change.data().aceptaTyC ? 'Si' : 'No',
+        let newRegistered = {
+            'Tipo de participante': snap.data().tipo,
+            "Num. carnet universitario": snap.data().carnet,
+            "Membresía IEEE": snap.data().membership,
+            "DNI": snap.data().dni,
+            'Nombres': snap.data().nombres,
+            'Apellidos': snap.data().apellidos,
+            'Correo electrónico': snap.data().email,
+            'Celular': snap.data().celular,
+            'Horario de llamada': snap.data().horarioLlamada,
+            'Aceptó términos y condiciones': snap.data().aceptaTyC ? 'Si' : 'No',
             'Observaciones': ''
         }
-        console.log("Nuevo Lead: ", newLead)
+        console.log("Nuevo Lead: ", newRegistered)
 
 
-        // Envío de correo
-        if (validateEmail(change.data().email)) {
-            mailOptions.to = change.data().email;
-            mailOptions.html = renderHTML({
-                name: change.data().nombre,
-                email: change.data().email
-            });
+        // // Envío de correo
+        // if (validateEmail(snap.data().email)) {
+        //     mailOptions.to = snap.data().email;
+        //     mailOptions.html = renderHTML({
+        //         name: snap.data().nombre,
+        //         email: snap.data().email
+        //     });
 
-            await transporter.sendMail(mailOptions);
-        }
+        //     await transporter.sendMail(mailOptions);
+        // }
 
-        writeLead(newLead);
+        writeRegistered(newRegistered);
 
         // Debe retornar un Promise
         return Promise.resolve('Exito')
     });
 
-module.exports = sendMails;
+module.exports = { sendMails, newRegistered };
