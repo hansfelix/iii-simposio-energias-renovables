@@ -7,6 +7,8 @@ const hbs = require("handlebars");
 
 admin.initializeApp();
 
-const sendMails = require('./mailing');
+const { sendMails, newRegistered } = require('./mailing');
 
 exports.sendMails = sendMails;
+
+exports.newRegistered = newRegistered;
