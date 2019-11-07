@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-light navbar-main bg-navbar">
     <div class="container">
       <div class="d-flex flex-grow-1">
-        <img :src="logoUrl" class="navbar-logo" />
+        <img :src="logoUrl" class="navbar-logo" @click="$router.push({path: '/'})" />
 
         <div class="w-100 text-right d-flex align-items-center">
           <button
@@ -14,11 +14,12 @@
             <span class="navbar-toggler-icon"></span>
           </button>
         </div>
-
-        
       </div>
 
-      <div class="navbar-collapse flex-grow-1 text-center order-2 order-lg-1" :class="{'collapse': hideNavbar}">
+      <div
+        class="navbar-collapse flex-grow-1 text-center order-2 order-lg-1"
+        :class="{'collapse': hideNavbar}"
+      >
         <span class="navbar-nav ml-auto flex-nowrap">
           <nuxt-link class="nav-item nav-link" to="/" exact>
             Inicio
@@ -70,6 +71,7 @@ export default {
 <style lang="scss">
 .navbar-logo {
   height: 40px;
+  cursor: pointer;
 }
 
 @media (min-width: 768px) {
@@ -130,8 +132,8 @@ export default {
   }
 
   .logo-ws {
-      width: 18px;
-      height: 18px;
+    width: 18px;
+    height: 18px;
   }
 }
 </style>

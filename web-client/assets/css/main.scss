@@ -43,12 +43,13 @@ $breakpoint-xxl: 1800px;
   padding-bottom: 20px;
 
   &__logo {
-    margin: 15px 0;
+    margin: 30px 0 10px;
     max-width: 100%;
     height: auto;
     width: auto;
 
     @include media(lg) {
+      margin: 15px 0;
       margin: 0 80px 15px;
     }
   }
@@ -65,7 +66,13 @@ $breakpoint-xxl: 1800px;
 
   &__information {
     display: flex;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+
+    @include media(lg) {
+      margin-bottom: 15px;
+      margin-top: 0px;
+    }
   }
 
   &__information-item {
@@ -102,14 +109,17 @@ $breakpoint-xxl: 1800px;
 
   &.bloque-principal {
     //padding-top: 76px; // reasignado
-    background: url("/bg_1.jpg");
+      background: url("/bg_1_movil.jpg");
     background-position: center;
+    background-position-y: bottom;
     background-size: cover;
-    background-attachment: fixed;
+    // background-attachment: fixed;
     min-height: calc(100vh - 76px);
 
-    @include media(sm) {
-      // height: 100vh;
+    @include media(md) {
+      background: none;
+      background-attachment: fixed;
+      background-position-y: center;
     }
 
     @include media(xs) {
@@ -121,7 +131,7 @@ $breakpoint-xxl: 1800px;
 // Títulos
 // -------
 .titulo-1 {
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: bold;
   position: relative;
   margin-bottom: 1.25rem;

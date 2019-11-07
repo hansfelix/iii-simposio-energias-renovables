@@ -26,13 +26,18 @@ export default {
   min-height: 100vh;
   display: grid;
   grid-template-rows: 1fr auto;
+  grid-template-columns: minmax(0, 1fr) ;
 
   &__content {
-    padding-top: 76px;
+    padding-top: 56px;
     background: url("/bg_2.jpg");
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
+
+    @include media(md) {
+      padding-top: 76px;
+    }
   }
 }
 
