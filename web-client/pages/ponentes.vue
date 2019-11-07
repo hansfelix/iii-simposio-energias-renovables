@@ -4,7 +4,7 @@
       <h1 class="titulo-1 mt-5">Ponentes de talla</h1>
       <p
         class="subtitulo-1"
-      >Además contaremos con ponentes de alto prestigio y experiencia, tanto nacional como internacional, en lo referente a energías renovables que harán que el simposio sea práctico y sobre todo útil.</p>
+      >En esta tercera edición contaremos con ponentes de alto prestigio y experiencia, tanto nacional como internacional, en lo referente a energías renovables que harán que el simposio sea práctico y sobre todo útil.</p>
       <div class="row">
         <template v-if="listaPonentes.length">
           <ponente
