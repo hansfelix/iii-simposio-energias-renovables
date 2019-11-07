@@ -25,7 +25,7 @@
         </div>
       </div>
 
-      <div class="col-lg-4">
+      <div class="lead-container col-lg-4">
         <!-- Formulario Lead -->
         <LeadForm />
       </div>
@@ -49,3 +49,13 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" >
+.lead-container {
+  margin-bottom: 100px;
+
+  @include media(md) {
+    margin-bottom: 0px;
+  }
+}
+</style>

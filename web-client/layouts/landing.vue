@@ -42,11 +42,19 @@ export default {
   grid-template-columns: minmax(0, 1fr);
 
   &__content {
-    padding-top: 76px;
-    background: url("/bg_1.jpg");
+    padding-top: 56px;
+    background: none;
     background-position: center;
     background-size: cover;
-    background-attachment: fixed;
+    // background-attachment: fixed;
+
+    @include media(md) {
+      padding-top: 76px;
+      background: url("/bg_1.jpg");
+      background-attachment: fixed;
+      background-position: center;
+      background-size: cover;
+    }
   }
 }
 
