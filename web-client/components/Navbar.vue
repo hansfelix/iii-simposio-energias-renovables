@@ -26,7 +26,7 @@
             <span class="sr-only">(current)</span>
           </nuxt-link>
           <nuxt-link class="nav-item nav-link" to="/ponentes" exact>Ponentes</nuxt-link>
-          <nuxt-link class="nav-item nav-link" to="/fff">Horario</nuxt-link>
+          <nuxt-link class="nav-item nav-link" to="/horario">Horario</nuxt-link>
         </span>
       </div>
 
